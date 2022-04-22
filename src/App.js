@@ -15,7 +15,6 @@ function App() {
   return (
     <div className="App">
       <h1>Termo Fake</h1>
-      {words && <div>Palavra do dia: {words}</div>}
     </div>
   );
 }
