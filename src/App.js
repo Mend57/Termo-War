@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Termo Fake</h1>
+      <h1>Termo Fake {words}</h1>
     </div>
   );
 }
