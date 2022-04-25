@@ -14,10 +14,10 @@ body {
   text-transform: uppercase;
 }
 .cell {
-  width: 70px;
-  height: 70px;
-  line-height: 65px;
-  margin: 2px;
+  width: 80px;
+  height: 80px;
+  line-height: 75px;
+  margin: 2.5px;
   font-size: 55px;
   background-color: #615458;
   border-radius: 10%;
