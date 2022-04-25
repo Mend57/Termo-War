@@ -12,7 +12,7 @@ let porra = [
 ];
 
 let random = Math.floor(Math.random() * porra.length)
-let solution = porra[random]
+let solution
 
 let currentGuess = ''
 let previousGuesses = []
@@ -91,14 +91,24 @@ function getColor(attempt, i) {
   return '#d3ad69'
 }
 
-
+// json-server ./data/db.json --port 3001
 function App() {
   const[solution, setSolution] = useState(null)
   useEffect(() => {
-    fetch("http://localhost:3001/words").then(res => res.json()).then(json => {
+    const url = "http://localhost:3001/words"
+    const fetchData = async () =>{
+      try{
+        const resp = await fetch(url)
+        const json = await resp.json()
         const random = json[Math.floor(Math.random() * json.length)]
         setSolution(random.word)
-      })
+        console.log(setSolution)
+        
+      } catch (err){
+        console.log("error", err)
+      }
+    }
+    fetchData();
   }, [setSolution])
 
   return (
