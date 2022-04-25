@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function App() {
-  const[words, setWord] = useState(null)
+  const[solution, setWord] = useState(null)
   useEffect(() => {
     fetch("http://localhost:3001/words")
       .then(res => res.json())
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Termo Fake {words}</h1>
+      <h1>Termo Fake {solution}</h1>
     </div>
   );
 }
