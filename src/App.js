@@ -11,8 +11,8 @@ let porra = [
   'putas',
 ];
 
-let random = Math.floor(Math.random() * porra.length)
 let solution
+let outOfScopeJson
 
 let currentGuess = ''
 let previousGuesses = []
@@ -22,12 +22,20 @@ buildGrid()
 updateGrid()
 window.addEventListener('keydown', handleKeyDown)
 
+const existsInJson = (json, value) => {
+  for (let i = 0; i < json.length; i += 1){
+    if(json[i].word == value)
+      return true;
+    }
+  return false
+}
+
 function handleKeyDown(e) {
   let letter = e.key.toLowerCase()
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
       return
-    } else if (!porra.includes(currentGuess)) {
+    } else if (!existsInJson(outOfScopeJson,currentGuess)) {
         return
     }
     previousGuesses.push(currentGuess)
@@ -93,13 +101,14 @@ function getColor(attempt, i) {
 
 // json-server ./data/db.json --port 3001
 function App() {
-  const[solution, setSolution] = useState(null)
+  const[solutionLocal, setSolution] = useState(null)
   useEffect(() => {
     const url = "http://localhost:3001/words"
     const fetchData = async () =>{
       try{
         const resp = await fetch(url)
         const json = await resp.json()
+        outOfScopeJson = json
         const random = json[Math.floor(Math.random() * json.length)]
         setSolution(random.word)
         console.log(setSolution)
@@ -111,9 +120,10 @@ function App() {
     fetchData();
   }, [setSolution])
 
+  solution = solutionLocal
   return (
     <div className="App">
-      <h1>Termo Fake {solution}</h1>
+      <h1>Termo Fake {solutionLocal}</h1>
     </div>
   );
 }
