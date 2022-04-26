@@ -12,8 +12,8 @@ let grid = document.getElementById('grid')
 
 const existsInJson = (json, value) => {
   for (let i = 0; i < json.length; i += 1){
-    if(json[i].word === value)
-      return true;
+    if(replaceAccent(json[i].word) === replaceAccent(value))
+      return json[i].word;
     }
   return false
 }
@@ -33,14 +33,18 @@ function replaceAccent(str){
 
 function handleKeyDown(e) {
   let letter = e.key.toLowerCase()
+  let word
 
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
       return 
-    } else if (!existsInJson(outOfScopeJson,currentGuess)) {
-        return 
+    } else{
+        word = existsInJson(outOfScopeJson,currentGuess)
+        if (!word) {
+          return
+        } 
     }
-    previousGuesses.push(currentGuess)
+    previousGuesses.push(word)
     currentGuess = ''
   } 
   else if (letter === 'backspace') {
