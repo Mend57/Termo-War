@@ -19,8 +19,20 @@ const existsInJson = (json, value) => {
   return false
 }
 
+function replaceAccent(str){
+    str = str.replace(/[àáâãäå]/,"a");
+    str = str.replace(/[eéèëê]/, "e");
+    str = str.replace(/[iíìïî]/, "i");
+    str = str.replace(/[oóòõöô]/, "o");  
+    str = str.replace(/[uúùüû]/, "u") 
+    str = str.replace(/[ç]/,"c");
+
+    return str.replace(/[^a-z0-9]/gi,''); 
+}
+
 function handleKeyDown(e) {
   let letter = e.key.toLowerCase()
+ 
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
       return
@@ -62,7 +74,7 @@ function updateGrid() {
   if (previousGuesses.length > 0 && previousGuesses[previousGuesses.length - 1] === solution) {
     alert('ganhou')
     return
-  } else if(previousGuesses.length == 6){
+  } else if(previousGuesses.length === 6){
     alert('perdeu')
     return
   }
