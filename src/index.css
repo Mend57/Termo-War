@@ -11,14 +11,18 @@ body {
   color: white;
   font-family: 'Mitr', sans-serif;  
   text-align: center;
+  line-height: 3px;
   text-transform: uppercase;
 }
 .cell {
-  width: 80px;
-  height: 80px;
-  line-height: 75px;
-  margin: 2.5px;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  margin: 3px;
   font-size: 55px;
+  border-width: 0.125em;
+  border-style: solid;
+  border-color: #ff004800;
   background-color: #615458;
   border-radius: 10%;
   display: inline-block;

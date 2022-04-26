@@ -8,8 +8,7 @@ let currentGuess = ''
 let previousGuesses = []
 
 let grid = document.getElementById('grid')
-buildGrid()
-updateGrid()
+
 window.addEventListener('keydown', handleKeyDown)
 
 const existsInJson = (json, value) => {
@@ -70,9 +69,11 @@ function drawAttempt(row, attempt, isCurrent) {
       cell.innerHTML = '<div style="opacity: 0">X</div>'
     }
     if (isCurrent) {
-      cell.style.backgroundColor = '#615458'
+      cell.style.backgroundColor = '#6e5c62'
+      cell.style.borderColor = '#4c4347'
     } else {
       cell.style.backgroundColor = getColor(attempt, i)
+      cell.style.borderColor = '#ff004800'
     }
   }
 }
@@ -117,5 +118,8 @@ function App() {
     </div>
   );
 }
+
+buildGrid()
+updateGrid()
 
 export default App
