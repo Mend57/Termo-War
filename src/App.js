@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-let solution
+let solution, noAccentSolution
 let outOfScopeJson
 
 let currentGuess = ''
@@ -20,6 +20,9 @@ const existsInJson = (json, value) => {
 
 
 function replaceAccent(str){
+    if (!str){
+      return 
+    }
     str = str.replace(/[àáâãäå]/,"a");
     str = str.replace(/[eéèëê]/, "e");
     str = str.replace(/[iíìïî]/, "i");
@@ -105,7 +108,7 @@ function drawAttempt(row, attempt, isCurrent) {
       cell.style.backgroundColor = '#6e5c62'
       cell.style.borderColor = '#4c4347'
     } else {
-      cell.style.backgroundColor = getColor(attempt, i)
+      cell.style.backgroundColor = getColor(replaceAccent(attempt), i)
       cell.style.borderColor = '#ff004800'
     }
   }
@@ -113,9 +116,9 @@ function drawAttempt(row, attempt, isCurrent) {
 
 
 function getColor(attempt, i) {
-  let correctLetter = solution[i]
+  let correctLetter = noAccentSolution[i]
   let attemptLetter = attempt[i]
-  if (attemptLetter === undefined || solution.indexOf(attemptLetter) === -1) {
+  if (attemptLetter === undefined || noAccentSolution.indexOf(attemptLetter) === -1) {
     return '#312a2c'
   } else if (correctLetter === attemptLetter) {
       return '#3aa394'
@@ -153,6 +156,7 @@ function App() {
   }, [setSolution])
   
   solution = solutionLocal
+  noAccentSolution = replaceAccent(solutionLocal)
   return (
     <div className="App">
       <h1>Termo Fake {solutionLocal}</h1>
