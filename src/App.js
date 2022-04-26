@@ -9,7 +9,6 @@ let previousGuesses = []
 
 let grid = document.getElementById('grid')
 
-window.addEventListener('keydown', handleKeyDown)
 
 const existsInJson = (json, value) => {
   for (let i = 0; i < json.length; i += 1){
@@ -18,6 +17,7 @@ const existsInJson = (json, value) => {
     }
   return false
 }
+
 
 function replaceAccent(str){
     str = str.replace(/[àáâãäå]/,"a");
@@ -30,14 +30,15 @@ function replaceAccent(str){
     return str.replace(/[^a-z0-9]/gi,''); 
 }
 
+
 function handleKeyDown(e) {
   let letter = e.key.toLowerCase()
- 
+
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
-      return
+      return 
     } else if (!existsInJson(outOfScopeJson,currentGuess)) {
-        return
+        return 
     }
     previousGuesses.push(currentGuess)
     currentGuess = ''
@@ -52,6 +53,7 @@ function handleKeyDown(e) {
   updateGrid()
 }
 
+
 function buildGrid() {
   for (let i = 0; i < 6; i++) {
     let row = document.createElement('div')
@@ -64,6 +66,7 @@ function buildGrid() {
     grid.appendChild(row)
   }
 }
+
 
 function updateGrid() {
   let row = grid.firstChild
@@ -82,11 +85,15 @@ function updateGrid() {
   drawAttempt(row, currentGuess, true)
 }
 
+
 function drawAttempt(row, attempt, isCurrent) {
   for (let i = 0; i < 5; i++) {
     let cell = row.children[i]
+    clearAnimation(cell)
+    
     if (attempt[i] !== undefined) {
       cell.textContent = attempt[i]
+      cell.style.animation = "bounce 0.15s";
     } else {
       cell.innerHTML = '<div style="opacity: 0">X</div>'
     }
@@ -100,6 +107,7 @@ function drawAttempt(row, attempt, isCurrent) {
   }
 }
 
+
 function getColor(attempt, i) {
   let correctLetter = solution[i]
   let attemptLetter = attempt[i]
@@ -110,6 +118,13 @@ function getColor(attempt, i) {
   } else{
       return '#d3ad69'
   }
+}
+
+
+function clearAnimation(cell) {
+  cell.style.animationName = ''
+  cell.style.animationDuration = ''
+  cell.style.animationTimingFunction = ''
 }
 
 // json-server ./data/db.json --port 3001
@@ -141,6 +156,7 @@ function App() {
   );
 }
 
+window.addEventListener('keydown', handleKeyDown)
 buildGrid()
 updateGrid()
 
