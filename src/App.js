@@ -1,16 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-let porra = [
-  'porra',
-  'corno',
-  'viado',
-  'troxa',
-  'pinto',
-  'penis',
-  'putas',
-];
-
 let solution
 let outOfScopeJson
 
@@ -24,7 +14,7 @@ window.addEventListener('keydown', handleKeyDown)
 
 const existsInJson = (json, value) => {
   for (let i = 0; i < json.length; i += 1){
-    if(json[i].word == value)
+    if(json[i].word === value)
       return true;
     }
   return false
@@ -92,11 +82,11 @@ function getColor(attempt, i) {
   let attemptLetter = attempt[i]
   if (attemptLetter === undefined || solution.indexOf(attemptLetter) === -1) {
     return '#312a2c'
+  } else if (correctLetter === attemptLetter) {
+      return '#3aa394'
+  } else{
+      return '#d3ad69'
   }
-  if (correctLetter === attemptLetter) {
-    return '#3aa394'
-  }
-  return '#d3ad69'
 }
 
 // json-server ./data/db.json --port 3001
