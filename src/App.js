@@ -29,9 +29,11 @@ function handleKeyDown(e) {
     }
     previousGuesses.push(currentGuess)
     currentGuess = ''
-  } else if (letter === 'backspace') {
+  } 
+  else if (letter === 'backspace') {
       currentGuess = currentGuess.slice(0, currentGuess.length - 1)
-  } else if (/[a-z]/.test(letter)) {
+  } 
+  else if (/^[a-z]$/.test(letter)) {
       if (currentGuess.length < 5)
         currentGuess += letter
   }
@@ -57,6 +59,14 @@ function updateGrid() {
     drawAttempt(row, attempt, false)
     row = row.nextSibling
   }
+  if (previousGuesses.length > 0 && previousGuesses[previousGuesses.length - 1] === solution) {
+    alert('ganhou')
+    return
+  } else if(previousGuesses.length == 6){
+    alert('perdeu')
+    return
+  }
+    
   drawAttempt(row, currentGuess, true)
 }
 
@@ -110,7 +120,7 @@ function App() {
     }
     fetchData();
   }, [setSolution])
-
+  
   solution = solutionLocal
   return (
     <div className="App">
