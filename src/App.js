@@ -35,7 +35,8 @@ function replaceAccent(str){
 async function handleKeyDown(e) {
   let letter = e.key.toLowerCase()
   let word
-  let row = grid.firstChild
+  let ntry = previousGuesses.length
+  let row = document.getElementsByClassName("row")[ntry];
 
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
@@ -49,6 +50,7 @@ async function handleKeyDown(e) {
           row.style.animation = 'shake 1s'
           await new Promise(resolve => setTimeout(resolve, 1000));
           clearAnimation(row)
+          console.log(grid)
           return
         }
     }
@@ -69,6 +71,7 @@ async function handleKeyDown(e) {
 function buildGrid() {
   for (let i = 0; i < 6; i++) {
     let row = document.createElement('div')
+    row.className = 'row'
     for (let j = 0; j < 5; j++) {
       let cell = document.createElement('div')
       cell.className = 'cell'
