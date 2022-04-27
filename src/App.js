@@ -140,7 +140,7 @@ function clearAnimation(cell) {
   cell.style.animationTimingFunction = ''
 }
 
-// json-server ./data/db.json --port 3001
+// json-server ./data/wordBank.json --port 3001
 function App() {
   const[solutionLocal, setSolution] = useState(null)
   useEffect(() => {
@@ -150,7 +150,7 @@ function App() {
         const resp = await fetch(url)
         const json = await resp.json()
         outOfScopeJson = json
-        const random = json[Math.floor(Math.random() * json.length)]
+        const random = json[Math.floor((Math.random() * (json.length + 1)))]
         setSolution(random.word)
         console.log(setSolution)
         
