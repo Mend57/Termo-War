@@ -22,7 +22,6 @@ body {
   font-size: 55px;
   border-width: 0.125em;
   border-style: solid;
-
   border-color: #ff004800;
   background-color: #615458;
   border-radius: 10%;
@@ -56,6 +55,7 @@ body {
   }
 
   50% {
+    background-color: transparent;
     transform: perspective(200px) rotateY(-90deg);
     border: none;
   }

@@ -9,7 +9,6 @@ let previousGuesses = []
 
 let grid = document.getElementById('grid')
 
-
 const existsInJson = (json, value) => {
   for (let i = 0; i < json.length; i += 1){
     if(replaceAccent(json[i].word) === replaceAccent(value))
@@ -17,7 +16,6 @@ const existsInJson = (json, value) => {
     }
   return false
 }
-
 
 function replaceAccent(str){
     if (!str){
@@ -34,18 +32,25 @@ function replaceAccent(str){
 }
 
 
-function handleKeyDown(e) {
+async function handleKeyDown(e) {
   let letter = e.key.toLowerCase()
   let word
+  let row = grid.firstChild
 
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
+      row.style.animation = 'shake 1s'
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      clearAnimation(row)      
       return 
     } else{
         word = existsInJson(outOfScopeJson,currentGuess)
         if (!word) {
+          row.style.animation = 'shake 1s'
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          clearAnimation(row)
           return
-        } 
+        }
     }
     previousGuesses.push(word)
     currentGuess = ''
@@ -97,10 +102,11 @@ function drawAttempt(row, attempt, isCurrent) {
   for (let i = 0; i < 5; i++) {
     let cell = row.children[i]
     clearAnimation(cell)
-    
+
     if (attempt[i] !== undefined) {
       cell.textContent = attempt[i]
       cell.style.animation = "bounce 0.15s";
+
     } else {
       cell.innerHTML = '<div style="opacity: 0">X</div>'
     }
@@ -164,8 +170,9 @@ function App() {
   );
 }
 
-window.addEventListener('keydown', handleKeyDown)
 buildGrid()
 updateGrid()
+window.addEventListener('keydown', handleKeyDown)
+
 
 export default App
