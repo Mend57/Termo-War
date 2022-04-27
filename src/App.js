@@ -37,6 +37,7 @@ async function handleKeyDown(e) {
   let word
   let ntry = previousGuesses.length
   let row = document.getElementsByClassName("row")[ntry];
+  let cells = row.getElementsByClassName("cell")
 
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
@@ -50,8 +51,14 @@ async function handleKeyDown(e) {
           row.style.animation = 'shake 1s'
           await new Promise(resolve => setTimeout(resolve, 1000));
           clearAnimation(row)
-          console.log(grid)
           return
+        }
+        console.log(cells)
+        for (let i = 0; i < cells.length; i++){
+          cells[i].style.animation = 'flip 0.58s'
+          cells[i].style.setProperty('--c', getColor(currentGuess, i))
+          await new Promise(resolve => setTimeout(resolve, 580));
+          clearAnimation(cells[i])
         }
     }
     previousGuesses.push(word)
