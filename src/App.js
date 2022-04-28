@@ -67,6 +67,7 @@ async function handleKeyDown(e) {
     }
     previousGuesses.push(word)
     currentGuess = ''
+    saveGame()
   } 
   else if (letter === 'backspace') {
       currentGuess = currentGuess.slice(0, currentGuess.length - 1)
@@ -154,7 +155,30 @@ function clearAnimation(cell) {
   cell.style.animationTimingFunction = ''
 }
 
-// json-server ./data/db.json --port 3001
+
+function loadGame(){
+  let data
+  try {
+    data = JSON.parse(localStorage.getItem('data'))
+  } catch { }
+  if (data != null && data.previousGuesses === previousGuesses){
+    previousGuesses = data.previousGuesses
+  }
+}
+
+
+function saveGame(){
+  let data = JSON.stringify({
+    noAccentSolution,
+    previousGuesses
+  })
+  try{
+  localStorage.setItem('data', data)
+  } catch{ }
+}
+
+
+// json-server ./data/wordBank.json --port 3001
 function App() {
   const[solutionLocal, setSolution] = useState(null)
   useEffect(() => {
@@ -164,7 +188,7 @@ function App() {
         const resp = await fetch(url)
         const json = await resp.json()
         outOfScopeJson = json
-        const random = json[Math.floor(Math.random() * json.length)]
+        const random = json[Math.floor((Math.random() * (json.length + 1)))]
         setSolution(random.word)
         console.log(setSolution)
         
@@ -184,6 +208,7 @@ function App() {
   );
 }
 
+loadGame()
 buildGrid()
 updateGrid()
 window.addEventListener('keydown', handleKeyDown)
