@@ -62,12 +62,18 @@ body {
 
   50.00001% {
     border: none;
-    backgrond-color: var(--c, transparent);
+    background-color: var(--color, transparent);
+    border-width: 0em;
+    width: 74px;
+    height: 74px;
   }
 
   100% {
     transform: perspective(200px) rotateY(0deg);
-    backgrond-color: var(--c, transparent);
+    background-color: var(--color, transparent);
+    border-width: 0em;
+    width: 74px;
+    height: 74px;
   }
 }
 

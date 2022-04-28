@@ -55,10 +55,14 @@ async function handleKeyDown(e) {
         }
         console.log(cells)
         for (let i = 0; i < cells.length; i++){
-          cells[i].style.animation = 'flip 0.58s'
-          cells[i].style.setProperty('--c', getColor(currentGuess, i))
-          await new Promise(resolve => setTimeout(resolve, 580));
+          cells[i].style.animation = 'flip 0.54s'
+          cells[i].style.setProperty('--color', getColor(currentGuess, i))
+          await new Promise(resolve => setTimeout(resolve, 540));
           clearAnimation(cells[i])
+          cells[i].style.setProperty('background-color', getColor(currentGuess, i))
+          cells[i].style.setProperty('border', 'none')
+          // cells[i].style.setProperty('height', '84px')
+          // cells[i].style.setProperty('width', '84px')
         }
     }
     previousGuesses.push(word)
