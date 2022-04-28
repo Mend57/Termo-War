@@ -57,7 +57,7 @@ async function handleKeyDown(e) {
         for (let i = 0; i < cells.length; i++){
           cells[i].style.animation = 'flip 0.5s'
           cells[i].style.setProperty('--color', getColor(currentGuess, i))
-          await new Promise(resolve => setTimeout(resolve, 400));
+          await new Promise(resolve => setTimeout(resolve, 500));
           clearAnimation(cells[i])
           cells[i].style.setProperty('background-color', getColor(currentGuess, i))
           cells[i].style.setProperty('border-color', getColor(currentGuess, i))
