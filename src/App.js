@@ -60,8 +60,7 @@ async function handleKeyDown(e) {
           await new Promise(resolve => setTimeout(resolve, 400));
           clearAnimation(cells[i])
           cells[i].style.setProperty('background-color', getColor(currentGuess, i))
-          // cells[i].style.setProperty('height', '84px')
-          // cells[i].style.setProperty('width', '84px')
+          cells[i].style.setProperty('border-color', getColor(currentGuess, i))
         }
     }
     previousGuesses.push(word)
