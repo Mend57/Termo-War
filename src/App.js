@@ -48,6 +48,10 @@ async function handleKeyDown(e) {
   let row = document.getElementsByClassName("row")[ntry];
   let cells = row.getElementsByClassName("cell")
 
+  if(inAnimation){
+    return
+  }
+
   if (letter === 'enter') {
     if (currentGuess.length < 5) {
       row.style.animation = 'shake 1s'
