@@ -61,13 +61,9 @@ async function handleKeyDown(e) {
     } else{
         word = existsInJson(outOfScopeJson,currentGuess)
         if (!word) {
-          startAnimation()
-
-            row.style.animation = 'shake 1s'
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
+          row.style.animation = 'shake 1s'
+          await new Promise(resolve => setTimeout(resolve, 1000));
           clearAnimation(row)
-          endAnimation()
           return
         }
         for (let i = 0; i < cells.length; i++){
