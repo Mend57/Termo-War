@@ -4,11 +4,30 @@ import { useEffect } from "react";
 let solution, noAccentSolution
 let outOfScopeJson
 
+let numLetters = [0, 0, 0, 0, 0]
+let letters = []
+
 let currentGuess = ''
 let previousGuesses = []
 let inAnimation = false
 
 let grid = document.getElementById('grid')
+
+let a = 'marar'
+function getLetters(){
+  for(let i = 0; i < 5; i++){
+    for(let j = 0; j < 5; j++)
+      if(a[i] === a[j]){
+        numLetters[j]++
+        j = 5
+      }
+  }
+
+  for(let k = 0; k < 5; k++){
+    letters[k] = a[k]
+  }
+}
+
 
 const startAnimation = () => {
   inAnimation = true
@@ -223,9 +242,12 @@ function App() {
 }
 
 loadGame()
+getLetters()
 buildGrid()
 updateGrid()
 window.addEventListener('keydown', handleKeyDown)
+console.log(letters)
+console.log(numLetters)
 
 
 export default App
