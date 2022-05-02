@@ -154,10 +154,18 @@ function drawAttempt(row, attempt, isCurrent) {
     if (attempt[i] !== undefined) {
       cell.textContent = attempt[i]
       cell.style.animation = "bounce 0.15s";
-
     } else {
       cell.innerHTML = '<div style="opacity: 0">X</div>'
     }
+
+    if (attempt[i-1] === undefined){
+      cell.style.borderBottomWidth = '0.125em'
+      cell.style.height = '70px'
+    } else {
+      cell.style.borderBottomWidth = '10px'
+      cell.style.height = '66px'
+    } 
+
     if (isCurrent) {
       cell.style.backgroundColor = '#6e5c62'
       cell.style.borderColor = '#4c4347'
