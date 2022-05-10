@@ -63,12 +63,14 @@ body {
   50.00001% {
     background-color: var(--color, transparent);
     border: 0.125em solid var(--color);
+    height: 70px;
   }
 
   100% {
     transform: perspective(200px) rotateY(0deg);
     background-color: var(--color, transparent);
     border: 0.125em solid var(--color);
+    height: 70px;
   }
 }
 
