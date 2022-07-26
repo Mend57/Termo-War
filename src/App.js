@@ -178,14 +178,17 @@ function drawAttempt(row, attempt, isCurrent) {
 
 
 function getColor(attempt, i) {
+  const yellow = '#d3ad69'
+  const darkBrown = '#312a2c'
+  const green = '#3aa394'
   let correctLetter = noAccentSolution[i]
   let attemptLetter = attempt[i]
   if (attemptLetter === undefined || noAccentSolution.indexOf(attemptLetter) === -1) {
-    return '#312a2c'
+    return darkBrown
   } else if (correctLetter === attemptLetter) {
-      return '#3aa394'
+      return green
   } else{
-      return '#d3ad69'
+      return yellow
   }
 }
 
