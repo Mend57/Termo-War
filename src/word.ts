@@ -10,7 +10,7 @@ type GuessResponse = {
 
 const MAXLEN = 5;
 
-function analyze(guess: string, correctWord: string): GuessResponse {
+function analyse(guess: string, correctWord: string): GuessResponse {
     let response: GuessResponse = {colors: new Array(5)}
     let counter: {[key: string]: number} = {}
     for (let c of correctWord){
